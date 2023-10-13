@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+    @apply px-4 py-2 font-semibold transition rounded-md bg-slate-200 hover:scale-105;
+}
+
+h1 {
+    @apply text-2xl font-bold; 
+}
+
+h2 {
+    @apply my-4 text-2xl font-bold; 
+}
+
+p.content {
+    @apply leading-loose 
+}
+
+.link {
+    @apply text-[#7563DF] font-bold max-w-full overflow-hidden text-ellipsis;
+}
+
+.primary-btn {
+    @apply px-4 py-2 text-white rounded-md bg-slate-800;
+}
+
+input, textarea {
+    @apply px-4 py-2 border rounded-md border-slate-300;
+}
+
+textarea {
+    @apply h-36 
+}
