@@ -1,6 +1,10 @@
+'use client'
 import Link from 'next/link'
+import { useSession, signOut } from 'next-auth/react'
 
 const Navbar = () => {
+  const { status } = useSession()
+  
   return (
     <div className='flex justify-between pb-4 border-b mn-4'>
       <div>
@@ -12,11 +16,17 @@ const Navbar = () => {
         </p>
       </div>
 
-      <div className='flex items-center '>
-        <Link className='btn' href='/sign-in'>
-          Sign In
-        </Link>
-      </div>
+      {
+        status === "authenticated" ? 
+          <div>
+            <button className='btn' onClick={signOut}>Sign Out</button>
+          </div> : 
+          <div className='flex items-center '>
+            <Link className='btn' href='/sign-in'>
+              Sign In
+            </Link>
+          </div>
+      }      
     </div>
   )
 }
