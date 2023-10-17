@@ -53,6 +53,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+// For technews app 
+  posts         Post[]
 }
 
 // The Verification Request model is used to store tokens for passwordless sign in emails.
@@ -73,3 +75,26 @@ model VerificationToken {
 //
 // id  String  @id @default(auto()) @map("_id") @db.ObjectId
 // 
+
+// For technews app 
+model Post {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  content     String
+  imageUrl    String?
+  publicId    String?
+  catName     String? 
+  category    Category? @relation(fields: [catName], references: [catName])
+  authorEmail String
+  author      User  @relation(fields: [authorEmail], references: [email])
+  links       String[]
+  createAt    DateTime  @default(now())
+  updateAt    DateTime  @updatedAt
+}
+
+model Category {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  catName   String   @unique
+  posts     Post[]
+  postIDs   String[] @db.ObjectId
+}
