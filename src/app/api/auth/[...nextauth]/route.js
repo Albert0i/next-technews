@@ -39,4 +39,9 @@ export { handler as GET, handler as POST }
 
    For production: https://{YOUR_DOMAIN}/api/auth/callback/google
    For development: http://localhost:3000/api/auth/callback/google
+
+   http://localhost:3000/sign-in?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fsign-in&error=OAuthAccountNotLinked
+   https://github.com/nextauthjs/next-auth/issues/519
+
+   If you see 'OAuthAccountNotLinked' it means you have already signed in with a different provider that is associated with the same email address.
 */
