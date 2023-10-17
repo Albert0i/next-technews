@@ -10,3 +10,6 @@ export async function GET() {
         return NextResponse.json('Something went wrong')
     }
 }
+/*
+    Chrome Extension | JSON Formatter
+*/
