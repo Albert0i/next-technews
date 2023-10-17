@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prismadb";
 
 export async function GET() {
-    return NextResponse.json({ message: 'test message'})
+    try {
+        const categories = await prisma.category.findMany() 
+        return NextResponse.json(categories)
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json('Something went wrong')
+    }
 }
