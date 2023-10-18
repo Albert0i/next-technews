@@ -45,7 +45,7 @@ DELETE http://localhost:3000/api/posts/652f51926c13ca5854de6c66
 GET http://localhost:3000/api/categories/AI
 Content-Type: application/json
 
-### Get all posts of a users
+### Get all posts of a user
 GET http://localhost:3000/api/authors/albert0i@hotmail.com
 Content-Type: application/json
 
