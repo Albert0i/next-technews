@@ -3,10 +3,6 @@ GET http://localhost:3000/api/categories
 Content-Type: application/json
 
 
-### Get all post of a category 
-GET http://localhost:3000/api/categories/Technology
-Content-Type: application/json
-
 ### Get all posts
 GET http://localhost:3000/api/posts
 Content-Type: application/json
@@ -20,8 +16,8 @@ POST http://localhost:3000/api/posts
 Content-Type: application/json
 
 {
-  "title": "New title 2", 
-  "content": "New content 2", 
+  "title": "New title", 
+  "content": "New content", 
   "links": ["www.google.com", "www.github.com"],
   "selectedCategory": "Technology",
   "imageUrl": "",
@@ -44,6 +40,14 @@ Content-Type: application/json
 ### Delete a post
 DELETE http://localhost:3000/api/posts/652f51926c13ca5854de6c66
 
+
+### Get all posts of a category 
+GET http://localhost:3000/api/categories/AI
+Content-Type: application/json
+
+### Get all posts of a users
+GET http://localhost:3000/api/authors/albert0i@hotmail.com
+Content-Type: application/json
 
 # 
 # REST Client for Visual Studio Code
