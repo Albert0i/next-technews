@@ -10,10 +10,18 @@ const Posts = async ( {post} ) => {
   const session = await getServerSession(authOptions)
   const isEditable = session && session?.user?.email === post.authorEmail
 
+  const dateObject = new Date(post.createdAt)
+  const options = {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }
+  const formattedDate = dateObject.toLocaleDateString('en-US', options)
+
   return (
     <div className='py-8 my-4 border-b border-slate-300'>
       <div className='mb-4'>
-        Posted by: <span className='font-bold'>{ author.name }</span> on {post.createdAt}
+        Posted by: <span className='font-bold'>{ author.name }</span> on {formattedDate}
       </div>
 
       <div className='relative w-full h-72'>
