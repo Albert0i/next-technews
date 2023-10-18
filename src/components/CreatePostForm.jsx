@@ -1,15 +1,31 @@
 'use client'
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
-import { categoriesData } from "../../data"
+import { useRouter } from "next/navigation"
 
 const CreatePostForm = () => {
   const [links, setLinks] = useState([])
   const [linkInput, setLinkInput] = useState('')
   const titleRef = useRef(null);
   const linkRef = useRef(null);
+  
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [categories, setCategories] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
+  const [publicId, setPublicId] = useState('')
+  const [error, setError] = useState('')
+  const router = useRouter()
 
   useEffect(() => {
+    const fetchAllCategories = async () => {
+      const res = await fetch('/api/categories')
+      const catNames = await res.json()
+      setCategories(catNames)
+    }
+
+    fetchAllCategories()
     titleRef.current.focus()
   }, [])
 
@@ -25,13 +41,39 @@ const CreatePostForm = () => {
     setLinks(prev => prev.filter((_, i) => i !== index))
   }
   
+  async function handleSubmit(e) {
+    e.preventDefault()
+    
+    if (!title || !content) {
+      setError('Title and content are required')
+      return
+    }
+    
+    try {
+      const res = await fetch('api/posts', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({
+          title, content, links, selectedCategory, imageUrl, publicId
+        })
+      }) 
+      if (res.ok) {
+        router.push('/dashboard')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
         <h2>Create Post</h2>
-        <form className='flex flex-col gap-2'>
-            <input type='text' placeholder='Title' ref={titleRef} />
+        <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
+            <input type='text' placeholder='Title' ref={titleRef} onChange={ e => setTitle(e.target.value)} />
 
-            <textarea placeholder='Content' />
+            <textarea placeholder='Content' onChange={ e => setContent(e.target.value)}/>
 
             <div>
                 { links && links.map( (link, index) => 
@@ -60,20 +102,23 @@ const CreatePostForm = () => {
                 </button>
             </div>
 
-            <select className='p-3 border rounded-md appearance-none'>
+            <select className='p-3 border rounded-md appearance-none' onChange={ e => setSelectedCategory(e.target.value)}>
                 <option value=''>Select a category</option>
                 {
-                    categoriesData && 
-                    categoriesData.map(category => 
-                        <option key={category.id} value={`${category.name}`}>{ category.name }</option>)
+                    categories && 
+                    categories.map(category => 
+                        <option key={category.id} value={`${category.catName}`}>{ category.catName }</option>)
                 }
             </select>
 
             <button type='submit' className='primary-btn'>Create Post</button>
 
-            <div className='py-2 font-bold text-red-500 '>
-                Error Message 
-            </div>
+            { error && 
+              <div className='py-2 font-bold text-red-500 '>
+                {error}
+              </div>
+            }
+            
         </form>
     </div>
   )

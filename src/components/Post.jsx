@@ -2,20 +2,23 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import DeleteButton from './DeleteButton'
+import { getServerSession } from 'next-auth/next'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-const Posts = ( {post} ) => {
+const Posts = async ( {post} ) => {
   const {id, author, datepublished:date, thumbnail, authorEmail, title, content, links, category } = post  
-  const isEditable = true;
+  const session = await getServerSession(authOptions)
+  const isEditable = session && session?.user?.email === post.authorEmail
 
   return (
     <div className='py-8 my-4 border-b border-slate-300'>
       <div className='mb-4'>
-        Posted by: <span className='font-bold'>{ author }</span> on {date}
+        Posted by: <span className='font-bold'>{ author.name }</span> on {post.createdAt}
       </div>
 
       <div className='relative w-full h-72'>
-        { thumbnail ? 
-          ( <Image src={thumbnail} alt={title} fill 
+        { post.imageUrl ? 
+          ( <Image src={post.imageUrl} alt={title} fill 
             className='object-cover object-center rounded-md' /> ) :         
           ( <Image src={'/thumbnail-placeholder.png'} alt={title} fill           
             className='object-cover object-center rounded-md' /> ) 
@@ -23,7 +26,7 @@ const Posts = ( {post} ) => {
       </div>
 
       <div>
-        { category && ( <Link className='text-white w-fit bg-slate-800 px-4 py-0.5 text-sm font-bold rounded-md mt-4 block' href={`/categories/${category}`}>{category}</Link> ) }
+        { post.catName && ( <Link className='text-white w-fit bg-slate-800 px-4 py-0.5 text-sm font-bold rounded-md mt-4 block' href={`/categories/${post.catName}`}>{post.catName}</Link> ) }
       </div>
 
       <h2>{title}</h2>

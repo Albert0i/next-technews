@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET(req, {params}) { 
     try {
@@ -16,6 +18,11 @@ export async function GET(req, {params}) {
 }
 
 export async function PUT(req, {params}) {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+        return NextResponse.json({message: 'Not authenticated...'}, {status: 401})
+    }
+
     try {
         const id = params.id
         const { title, content, links, selectedCategory, imageUrl, publicId } = await req.json() 
@@ -36,6 +43,11 @@ export async function PUT(req, {params}) {
 }
 
 export async function DELETE(req, {params}) {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+        return NextResponse.json({message: 'Not authenticated...'}, {status: 401})
+    }
+
     try {
         const id = params.id
         const post = await prisma.post.delete({ where: {id}})
