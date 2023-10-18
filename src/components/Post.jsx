@@ -6,11 +6,11 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 const Posts = async ( {post} ) => {
-  const {id, author, datepublished:date, thumbnail, authorEmail, title, content, links, category } = post  
+  const {id, author, createdAt:date, imageUrl, authorEmail, title, content, links, catName } = post  
   const session = await getServerSession(authOptions)
-  const isEditable = session && session?.user?.email === post.authorEmail
+  const isEditable = session && session?.user?.email === authorEmail
 
-  const dateObject = new Date(post.createdAt)
+  const dateObject = new Date(date)
   const options = {
     month: 'short',
     day: 'numeric',
@@ -25,8 +25,8 @@ const Posts = async ( {post} ) => {
       </div>
 
       <div className='relative w-full h-72'>
-        { post.imageUrl ? 
-          ( <Image src={post.imageUrl} alt={title} fill 
+        { imageUrl ? 
+          ( <Image src={imageUrl} alt={title} fill 
             className='object-cover object-center rounded-md' /> ) :         
           ( <Image src={'/thumbnail-placeholder.png'} alt={title} fill           
             className='object-cover object-center rounded-md' /> ) 
@@ -34,7 +34,7 @@ const Posts = async ( {post} ) => {
       </div>
 
       <div>
-        { post.catName && ( <Link className='text-white w-fit bg-slate-800 px-4 py-0.5 text-sm font-bold rounded-md mt-4 block' href={`/categories/${post.catName}`}>{post.catName}</Link> ) }
+        { post.catName && ( <Link className='text-white w-fit bg-slate-800 px-4 py-0.5 text-sm font-bold rounded-md mt-4 block' href={`/categories/${catName}`}>{catName}</Link> ) }
       </div>
 
       <h2>{title}</h2>
