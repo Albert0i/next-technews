@@ -1,0 +1,51 @@
+### Get all categories
+GET http://localhost:3000/api/categories
+Content-Type: application/json
+
+
+### Get all post of a category 
+GET http://localhost:3000/api/categories/Technology
+Content-Type: application/json
+
+### Get all posts
+GET http://localhost:3000/api/posts
+Content-Type: application/json
+
+### Get a single post
+GET http://localhost:3000/api/posts/652f520d6c13ca5854de6c67
+Content-Type: application/json
+
+### Create new post
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "New title 2", 
+  "content": "New content 2", 
+  "links": ["www.google.com", "www.github.com"],
+  "selectedCategory": "Technology",
+  "imageUrl": "",
+  "publicId": ""
+}
+
+### Update a post 
+PUT http://localhost:3000/api/posts/652f520d6c13ca5854de6c67
+Content-Type: application/json
+
+{
+  "title": "New title updated", 
+  "content": "New content updated", 
+  "links": ["abc.com"],
+  "selectedCategory": "Technology",
+  "imageUrl": "",
+  "publicId": ""
+}
+
+### Delete a post
+DELETE http://localhost:3000/api/posts/652f51926c13ca5854de6c66
+
+
+# 
+# REST Client for Visual Studio Code
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+#
