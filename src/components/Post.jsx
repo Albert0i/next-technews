@@ -5,7 +5,7 @@ import DeleteButton from './DeleteButton'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-const Posts = async ( {post} ) => {
+const Posts = async ( {post, authorName } ) => {
   const {id, author, createdAt:date, imageUrl, authorEmail, title, content, links, catName } = post  
   const session = await getServerSession(authOptions)
   const isEditable = session && session?.user?.email === authorEmail
@@ -21,7 +21,7 @@ const Posts = async ( {post} ) => {
   return (
     <div className='py-8 my-4 border-b border-slate-300'>
       <div className='mb-4'>
-        Posted by: <span className='font-bold'>{ author.name }</span> on {formattedDate}
+        Posted by: <span className='font-bold'>{ author?.name }{ authorName }</span> on {formattedDate}
       </div>
 
       <div className='relative w-full h-72'>
@@ -57,7 +57,7 @@ const Posts = async ( {post} ) => {
       { isEditable && (
         <div className='flex gap-3 px-4 py-2 font-bold rounded-md w-fit bg-slate-200'>
           <Link href={`/edit-post/${id}`}>Edit</Link>
-          <DeleteButton />
+          <DeleteButton id={id} />
         </div>  
       ) }
     </div>
