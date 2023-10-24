@@ -3,6 +3,7 @@ import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { CldUploadButton } from 'next-cloudinary';
+import Image from "next/image";
 
 const CreatePostForm = () => {
   const [links, setLinks] = useState([])
@@ -46,12 +47,32 @@ const CreatePostForm = () => {
     console.log('result=', result)
     const info = result.info 
     
-    if ('secure_url' in info && 'public_id' in info) {
-      const url = info.secure_info
+    if ('secure_url' in info && 'public_id' in info) {      
+      const url = info.secure_url
       const public_id = info.public_id
-
-      
+      setImageUrl(url)
+      setPublicId(public_id)
+      console.log('url=', url)
+      console.log('public_id=', public_id)
     }
+  }
+
+  async function removeImage(e) { 
+    e.preventDefault()
+
+    try {
+      const res = await fetch('api/removeImage', {
+        method: 'DELETE', 
+        headers: { "Content-Type":  "application/json" }, 
+        body: JSON.stringify({ publicId })
+      })
+      if (res.ok) {
+        setImageUrl('')
+        setPublicId('')
+      }
+    } catch (error) {
+      console.log(error)
+    }    
   }
 
   async function handleSubmit(e) {
@@ -115,14 +136,18 @@ const CreatePostForm = () => {
                 </button>
             </div>
 
-            <CldUploadButton uploadPreset="bfm35log" className='grid h-48 mt-4 border-2 border-dotted rounded-md place-items-center bg-slate-100' 
+            <CldUploadButton uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET} 
+            className={`relative grid h-48 mt-4 border-2 border-dotted rounded-md place-items-center bg-slate-100 ${imageUrl && 'pointer-events-none'}`} 
             onUpload={handleImageUpload} >
               <div>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
 </svg>
               </div>
+              { imageUrl && <Image src={imageUrl} fill className='absolute inset-0 object-cover ' alt={title} ></Image> }
             </CldUploadButton>
+
+            { publicId && <button className='px-4 py-2 mb-4 font-bold text-white bg-red-500 rounded-md w-fit' onClick={removeImage} >Remove Image</button> }
 
             <select className='p-3 border rounded-md appearance-none' onChange={ e => setSelectedCategory(e.target.value)}>
                 <option value=''>Select a category</option>
