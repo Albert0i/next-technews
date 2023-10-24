@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
+import { CldUploadButton } from 'next-cloudinary';
 
 const CreatePostForm = () => {
   const [links, setLinks] = useState([])
@@ -41,6 +42,18 @@ const CreatePostForm = () => {
     setLinks(prev => prev.filter((_, i) => i !== index))
   }
   
+  function handleImageUpload(result) {
+    console.log('result=', result)
+    const info = result.info 
+    
+    if ('secure_url' in info && 'public_id' in info) {
+      const url = info.secure_info
+      const public_id = info.public_id
+
+      
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     
@@ -101,6 +114,15 @@ const CreatePostForm = () => {
                     Add
                 </button>
             </div>
+
+            <CldUploadButton uploadPreset="bfm35log" className='grid h-48 mt-4 border-2 border-dotted rounded-md place-items-center bg-slate-100' 
+            onUpload={handleImageUpload} >
+              <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+</svg>
+              </div>
+            </CldUploadButton>
 
             <select className='p-3 border rounded-md appearance-none' onChange={ e => setSelectedCategory(e.target.value)}>
                 <option value=''>Select a category</option>
