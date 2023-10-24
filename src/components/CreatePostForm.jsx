@@ -50,7 +50,7 @@ const CreatePostForm = () => {
     }
     
     try {
-      const res = await fetch('api/posts', { 
+      const res = await fetch('/api/posts', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

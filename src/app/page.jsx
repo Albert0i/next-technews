@@ -1,6 +1,5 @@
 import CategoriesList from "@/components/CategoriesList";
 import Post from "@/components/Post";
-import { postsData } from '@../../data'
 
 const getPosts = async () => {
   try {
@@ -21,7 +20,7 @@ export default async function Home() {
   return (<div>
             <CategoriesList />
             
-            { posts && postsData.length > 0 ? 
+            { posts && posts.length > 0 ? 
               posts.map((post) => ( <Post key={post.id} post={post} /> ) ) : 
               <div className='py-6'>No posts to display</div> } 
         </div>)
