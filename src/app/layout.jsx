@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import { NextAuthProvider } from '@/components/Providers'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,8 +24,15 @@ export default function RootLayout({ children }) {
             </div>
             <Footer />
           </div>
+
+          <Toaster></Toaster>
+
         </NextAuthProvider>        
       </body>
     </html>
   )
 }
+/*
+   React Hot Toast
+   https://react-hot-toast.com/
+*/

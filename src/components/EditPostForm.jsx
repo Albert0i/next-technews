@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { CldUploadButton } from 'next-cloudinary';
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 
 const EditPostForm = ({ post }) => {
   const [links, setLinks] = useState([])
@@ -17,7 +18,7 @@ const EditPostForm = ({ post }) => {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [imageUrl, setImageUrl] = useState('')
   const [publicId, setPublicId] = useState('')
-  const [error, setError] = useState('')
+  //const [error, setError] = useState('')
   const router = useRouter()
 
   useEffect(() => {
@@ -92,7 +93,9 @@ const EditPostForm = ({ post }) => {
     e.preventDefault()
     
     if (!title || !content) {
-      setError('Title and content are required')
+      //setError('Title and content are required')
+      const errorMessage = 'Title and content are required'
+      toast.error(errorMessage)
       return
     }
     
@@ -107,7 +110,10 @@ const EditPostForm = ({ post }) => {
         })
       }) 
       if (res.ok) {
+        toast.success('Post edited successfully')
         router.push('/dashboard')
+      } else {
+        toast.error('Something went wrong')
       }
     } catch (error) {
       console.log(error)
@@ -173,11 +179,11 @@ const EditPostForm = ({ post }) => {
 
             <button type='submit' className='primary-btn'>Update Post</button>
 
-            { error && 
+            {/* { error && 
               <div className='py-2 font-bold text-red-500 '>
                 {error}
               </div>
-            }
+            } */}
             
         </form>
     </div>
