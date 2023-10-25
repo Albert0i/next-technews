@@ -61,7 +61,7 @@ const CreatePostForm = () => {
     e.preventDefault()
 
     try {
-      const res = await fetch('api/removeImage', {
+      const res = await fetch('/api/removeImage', {
         method: 'DELETE', 
         headers: { "Content-Type":  "application/json" }, 
         body: JSON.stringify({ publicId })
