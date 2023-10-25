@@ -11,7 +11,7 @@ const CreatePostForm = () => {
   const [linkInput, setLinkInput] = useState('')
   const titleRef = useRef(null);
   const linkRef = useRef(null);
-  
+    
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [categories, setCategories] = useState([])
@@ -99,6 +99,7 @@ const CreatePostForm = () => {
       if (res.ok) {
         toast.success('Post created successfully')
         router.push('/dashboard')
+        router.refresh()
       } else {
         toast.error('Something went wrong')
       }
