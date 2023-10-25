@@ -15,7 +15,7 @@ DATABASE_URL=<your mongodb url>
 NODE_ENV=development 
 APP_ENV=localhost
 
-# Cloudinary (2023/10/24)
+# Cloudinary
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=<your cloudinary cloud name>
 CLOUDINARY_API_KEY=<your cloudinary api key>
 CLOUDINARY_API_SECRET=<your cloudinary api secret>
@@ -23,7 +23,3 @@ CLOUDINARY_API_SECRET=<your cloudinary api secret>
 # Whenever we are using environment variables in a client component
 # The name of the environment variable should start with "NEXT_PUBLIC" !!! 
 NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=<your cloudinary upload preset>
-
-#
-# EOF (2023/10/25)
-#
