@@ -36,3 +36,17 @@ export default function RootLayout({ children }) {
    React Hot Toast
    https://react-hot-toast.com/
 */
+export const dynamic = "force-dynamic";
+/*
+   Vercel build dependency caching workaround
+   https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/vercel-caching-issue
+   
+   Next.js CLI
+   https://nextjs.org/docs/pages/api-reference/next-cli
+   
+   Forcing dynamic on multiple routes/project-wide
+   https://github.com/vercel/next.js/discussions/48989
+
+   Route Segment Config
+   https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
+*/
