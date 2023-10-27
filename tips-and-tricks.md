@@ -112,24 +112,113 @@ Whenever we are using environment variables in a client component
 The name of the environment variable should start with `NEXT_PUBLIC`
 
 
-### 8. react hot toast 
+### 8. [React Hot Toast](https://react-hot-toast.com/)
+layout.js
+```
+. . . 
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <NextAuthProvider>
+          <div className='lg:max-w-[900px] lg:px-16 mx-auto py-8 shadow-xl min-h-screen flex flex-col px-8'>
+            <Navbar />
+            <div className='flex-auto'>
+              {children}
+            </div>
+            <Footer />
+          </div>
+
+          <Toaster></Toaster>
+
+        </NextAuthProvider>        
+      </body>
+    </html>
+  )
+}
+```
+CreatePostForm.jsx
+```
+import { toast } from "react-hot-toast";
+. . . 
+if (res.ok) {
+        toast.success('Post created successfully')
+        router.push('/dashboard')
+        router.refresh()
+      } else {
+        toast.error('Something went wrong')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+```
 
 
-### 9. hero icons 
+### 9. [heroicons](https://heroicons.com/)
+> The quickest way to use these icons is to simply copy the source for the icon you need from [heroicons.com](https://heroicons.com/) and inline it directly into your HTML:
+
+Unlike [Font Awesome](https://fontawesome.com/docs), you don't need to install any package. Just type to search the icon and choose `Outline`, `Solid`, `Mini`, then copy either `SVG` or `JSX` and paste into your code. Definitely, heroicons has less icons than fontasesome. 
+
+bell-alert
+```
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+</svg>
+```
 
 
-### 12. open ssl random token 
+### 10. Generate random token with `openssl`
 ```
 openssl rand -base64 32 
 ```
 
 
-### 13. importing a json file
+### 11. Importing JSON data
+Categories.json
+```
+[ 
+  {
+    "id": 1,
+    "catName": "Technology"
+  },
+  {
+    "id": 2,
+    "catName": "Tips & Tricks"
+  },
+  {
+    "id": 3, 
+    "catName": "AI"
+  },
+  {
+    "id": 4,
+    "catName": "Web Dev"
+  },
+  {
+    "id": 5,
+    "catName": "Programming"
+  }
+]
+```
+Page.jsx 
+```
+import categories from "@/Categories.json"
+. . . 
+categories.map(category => console.log('category=', category))
+```
+
+### 12. [Static generation failed due to dynamic usage](https://github.com/vercel/next.js/discussions/48989)
+![alt build](img/Static-generation-failed-due-to-dynamic-usage.JPG)
+Add the following to `layout.jsx`
+```
+export const dynamic = "force-dynamic";
+```
+> 'force-dynamic': Force dynamic rendering and uncached data fetching of a layout or page by disabling all caching of fetch requests and always revalidating. [read more](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
 
 
 ### Reference
 1. [Build & Deploy a Full-Stack Website with Next.js 13 | Typescript, Prisma, Cloudinary, Tailwind](https://youtu.be/g7rE5exVQRk)
 2. [The Brothers Karamazov](https://www.gutenberg.org/cache/epub/28054/pg28054-images.html#chap93)
+
 
 ### Epilogue 
 
