@@ -15,7 +15,7 @@ next build --debug
 With this flag enabled additional build output like rewrites, redirects, and headers will be shown.
 
 
-### 2. Escalating string literals
+### 2.Escalating string literals
 ```
 <body className={inter.className}>
 ```
@@ -34,14 +34,14 @@ to
 In this way, subsequent actions of injecting styles can be fulfilled. 
 
 
-### 3. [useRouter](https://nextjs.org/docs/app/api-reference/functions/use-router) vs [redirect](https://nextjs.org/docs/app/api-reference/functions/redirect) 
+### 3.[useRouter](https://nextjs.org/docs/app/api-reference/functions/use-router) vs [redirect](https://nextjs.org/docs/app/api-reference/functions/redirect) 
 > The `useRouter` hook allows you to programmatically change routes inside Client Components.
 > **Recommendation**: Use the `<Link> component` for navigation unless you have a specific requirement for using `useRouter`.
 
 > The `redirect` function allows you to `redirect` the user to another URL. redirect can be used in Server Components, Client Components, [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers), and [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/forms-and-mutations).
 
 
-### 4. [Check if a Property Exists in a JavaScript Object](https://www.freecodecamp.org/news/how-to-check-if-a-property-exists-in-a-javascript-object/)
+### 4.[Check if a Property Exists in a JavaScript Object](https://www.freecodecamp.org/news/how-to-check-if-a-property-exists-in-a-javascript-object/)
 ```
 const myObject = {
     name: 'john',
@@ -76,7 +76,7 @@ if (myObject.hasOwnProperty('name')) {
 > Lastly, we can see if a property exists in the object by checking if `property !== undefined`.
 
 
-### 5. [min-h-screen](https://tailwindcss.com/docs/min-height) and [flex-auto](https://tailwindcss.com/docs/flex)
+### 5.[min-h-screen](https://tailwindcss.com/docs/min-height) and [flex-auto](https://tailwindcss.com/docs/flex)
 ```
 . . . 
 export default function RootLayout({ children }) {
@@ -96,7 +96,7 @@ export default function RootLayout({ children }) {
 The children is set to full screen height. 
 
 
-### 6. `fetch` from clinet/server component 
+### 6.`fetch` from clinet/server component 
 To `fetch` backend api from client component, you can specify relative path, ie
 ```
 const res = await fetch('/api/categories')
@@ -108,12 +108,12 @@ const res = await fetch('http://localhost:3000/api/categories')
 in server component.
 
 
-### 7. environment var in front end
+### 7.Environment var in front end
 Whenever we are using environment variables in a client component
 The name of the environment variable should start with `NEXT_PUBLIC`
 
 
-### 8. [React Hot Toast](https://react-hot-toast.com/)
+### 8.[React Hot Toast](https://react-hot-toast.com/)
 layout.js
 ```
 . . . 
@@ -155,7 +155,7 @@ if (res.ok) {
 ```
 
 
-### 9. [heroicons](https://heroicons.com/)
+### 9.[heroicons](https://heroicons.com/)
 > The quickest way to use these icons is to simply copy the source for the icon you need from [heroicons.com](https://heroicons.com/) and inline it directly into your HTML:
 
 Unlike [Font Awesome](https://fontawesome.com/docs), you don't need to install any package. Just type to search the icon and choose `Outline`, `Solid`, `Mini`, then copy either `SVG` or `JSX` and paste into your code. Definitely, heroicons has less icons than fontasesome. 
@@ -168,13 +168,13 @@ bell-alert
 ```
 
 
-### 10. Generate random token with `openssl`
+### 10.Generate random token with `openssl`
 ```
 openssl rand -base64 32 
 ```
 
 
-### 11. Importing JSON data
+### 11.Importing JSON data
 Categories.json
 ```
 [ 
@@ -207,7 +207,7 @@ import categories from "@/Categories.json"
 categories.map(category => console.log('category=', category))
 ```
 
-### 12. [Static generation failed due to dynamic usage](https://github.com/vercel/next.js/discussions/48989)
+### 12.[Static generation failed due to dynamic usage](https://github.com/vercel/next.js/discussions/48989)
 ![alt build](img/Static-generation-failed-due-to-dynamic-usage.JPG)
 Add the following to `layout.jsx`
 ```
