@@ -1,6 +1,7 @@
 ### Tips and Tricks 
 
 ### Prologue
+![alt brothers karamazov](img/vlcsnap-2019-06-02-10h29m42s70.png)
 
 ### 1. [Next.js CLI](https://nextjs.org/docs/app/api-reference/next-cli)
 `next dev` starts the application in development mode. By default, it will start at `http://localhost:3000`, which can be changed with `-p`: 
