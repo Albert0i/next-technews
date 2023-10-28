@@ -17,4 +17,7 @@ if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
    @auth/prisma-adapter
    https://authjs.dev/reference/adapter/prisma
+
+   Prisma Client API reference
+   https://www.prisma.io/docs/reference/api-reference/prisma-client-reference?fbclid=IwAR38vXkekWB7-pG7R2ZFCwYNd53ocpTOCW--ZbAOzEKGBK1wrTpxWLJew6w#prismaclient
 */
