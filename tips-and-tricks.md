@@ -213,7 +213,30 @@ Add the following to `layout.jsx`
 ```
 export const dynamic = "force-dynamic";
 ```
-> 'force-dynamic': Force dynamic rendering and uncached data fetching of a layout or page by disabling all caching of fetch requests and always revalidating. [read more](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
+> 'force-dynamic': Force dynamic rendering and uncached data fetching of a layout or page by disabling all caching of fetch requests and always revalidating. [...](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
+
+
+### 13.Error validating datasource `db`: the URL must start with the protocol `mongo`.
+```
+npm run build
+```
+The build process works fine in Win10, however in Debian 11, it just can't get `DATABASE_URL` from `.env`! 
+
+![alt env](img/Screenshot-2023-10-28-3.08.03-PM.png)
+
+It is said that removing the double quotes may help: 
+
+> Removing the quotes worked for me as well. Most .env parsers support quotes around values, but apparently not prisma。[...](https://github.com/prisma/prisma/discussions/12170)
+
+But not in my case... Being overwhelm by desperation... the last resort is to precede the command with environment variable, ie:
+```
+DATABASE_URL=<your mongodb url> npm run build 
+```
+and 
+```
+DATABASE_URL=<your mongodb url> npm start 
+```
+I have checked the [Environment variables](https://www.prisma.io/docs/guides/development-environment/environment-variables) in prisma doc and still don't know why.... 
 
 
 ### Reference
