@@ -158,7 +158,7 @@ if (res.ok) {
 ### 9. [heroicons](https://heroicons.com/)
 > The quickest way to use these icons is to simply copy the source for the icon you need from [heroicons.com](https://heroicons.com/) and inline it directly into your HTML:
 
-Unlike [Font Awesome](https://fontawesome.com/docs), you don't need to install any package. Just type to search the icon and choose `Outline`, `Solid`, `Mini`, then copy either `SVG` or `JSX` and paste into your code. Definitely, heroicons has less icons than fontasesome. 
+Unlike [Font Awesome](https:\/\/fontawesome.com\/docs), you don't need to install any package. Just type to search the icon and choose `Outline`, `Solid`, `Mini`, then copy either `SVG` or `JSX` and paste into your code. Definitely, heroicons has less icons than fontasesome. 
 
 bell-alert
 ```
